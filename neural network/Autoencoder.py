@@ -1,12 +1,16 @@
 #coding:utf8
 import tensorflow as tf
-import tensorlayer as tl
-from tensorlayer.layers import set_keep
 import numpy as np
-import time
 
-from splitdata import getMatchMatrix
-from Utils import *
+
+def xavier_init(fan_in, fan_out, constant = 1):
+    low = -constant * np.sqrt(6.0 / (fan_in + fan_out))
+    high = constant * np.sqrt(6.0 / (fan_in + fan_out))
+    return tf.random_uniform((fan_in, fan_out),
+                             minval = low, maxval = high,
+                             dtype = tf.float32)
+
+
 class Autoencoder:
     '''
         A simple Autorcoder written by tensorflow
